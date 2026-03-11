@@ -31,15 +31,22 @@ object-fit:cover;
 <video autoplay muted playsinline id="scare">
 <source src="scare.mp4" type="video/mp4">
 </video>
-
 <script>
+let v = document.getElementById("scare");
 
-let v=document.getElementById("scare")
-
-v.requestFullscreen().catch(()=>{})
-
+// Ensure it plays on page load after user click
+window.addEventListener("load", () => {
+    v.play().catch(() => {
+        // fallback if autoplay still fails
+        console.log("Autoplay failed, trying again after user gesture");
+    });
+    
+    // Try fullscreen
+    v.requestFullscreen().catch(()=>{});
+});
 </script>
 
 </body>
 
 </html>
+
